@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Eye Tracker - Afină</title>
+    <style>
+        body { text-align: center; background: #111; color: white; }
+        img { border: 3px solid #444; border-radius: 8px; margin-top: 20px; }
+        .controls { margin-top: 20px; }
+        button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            background: #e74c3c;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover { background: #c0392b; }
+    </style>
+</head>
+<body>
+    <h1>Eye Tracker - Varianta A</h1>
+    <p>Apasă <b>SPACE</b> pentru calibrare și <b>C</b> pentru click</p>
+    <img src="{{ url_for('video_feed_affine') }}" width="960" height="540">
+    <div class="controls">
+        <form action="/" method="get">
+            <button type="submit">Înapoi la Meniu</button>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("keydown", function(event) {
+            if (event.code === "Space") {
+                fetch("/keypress/space", {method: "POST"});
+            }
+            if (event.key.toLowerCase() === "c") {
+                fetch("/keypress/c", {method: "POST"});
+            }
+        });
+    </script>
+</body>
+</html>
